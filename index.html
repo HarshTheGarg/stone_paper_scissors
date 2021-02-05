@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stone, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+
+        //Implementing Score Cunter
+        let playerCounter = 0;
+        let computerCounter = 0;
+
+        //Computer's Selection
+        function computerPlay() {
+            let compNum = Math.floor(Math.random() * 3);
+            
+            // console.log(compNum); // To be deleted
+        
+            if(compNum === 0) {
+                return "Stone";
+            } else if(compNum === 1){
+                return "Paper";
+            }else{
+                return "Scissors";
+            };
+        };
+
+
+        //Comparing the results 
+        function playRound(playerSelection, computerSelection) {
+
+            if ( //If Computer Wins 
+                (playerSelection.toLowerCase() == "Stone".toLowerCase()
+                 && computerSelection.toLowerCase() == "Paper".toLowerCase()) 
+
+                 || (playerSelection.toLowerCase() == "Paper".toLowerCase()
+                 && computerSelection.toLowerCase() == "Scissors".toLowerCase()) 
+
+                 || (playerSelection.toLowerCase() == "Scissors".toLowerCase()
+                 && computerSelection.toLowerCase() == "Stone".toLowerCase())
+                 ) {
+                
+                    return "computer";
+
+            } else if ( //If Its a Tie
+                playerSelection.toLowerCase() == computerSelection.toLowerCase()
+                ){
+                return "tie";
+
+            } else { //User Wins
+                return "user";
+            };
+        };
+
+
+        //Playes selects and the result string is returned
+        function game() {
+
+            //Promt user for their input
+            let playerSelection = prompt("What do you choose?");
+
+            //Validating playerInput
+            // let playerSelection = validate(playerInput);
+
+            //Player Selection to Title case
+            //let playerSelectionFinal = titleCase(playerSelection)
+
+            //computerPlay() called for computer's "input"
+            let computerSelection = computerPlay();
+
+            //computer, user or tie stored in result
+            let result = playRound(playerSelection, computerSelection);
+            //console.log(result)
+
+            //returning apropriate string depending on result
+            if (result == "computer") {
+
+                ++computerCounter;
+                return (`You lose! ${computerSelection} beats ${playerSelection}`);
+                
+            } else if (result == "user"){
+                
+                ++playerCounter;
+                return (`You Win! ${playerSelection} beats ${computerSelection}`);
+
+            }else {
+                return (`Its a tie.`);
+            };
+        };
+
+
+        //Functioonfor validating player's input
+        // function validate(playerSelection) {
+            //if (playerSelection.toLowerCase() == "stone"
+            //|| playerSelection.toLowerCase() == "paper" 
+            //|| playerSelection.toLowerCase() == "scissors"
+            //) {
+            //   return playerSelection; 
+            //}else{
+            //    return "Wrong Input";
+            //}
+        //}
+
+        //Convert to Title Case
+        //function titleCase(word) {
+            //return (word[0].toUpperCase() + word.slice(1).toLowerCase() )
+            //let newWord = (word[0].toUpperCase() + word.slice(1).toLowerCase() )
+            //console.log(newWord)
+            //return newWord
+        //}
+
+
+        //Play the game 5 times
+        for (let i = 1; i <= 5; i++) {
+
+        
+            //Starting the game
+            let result = game();
+
+            //Declaring the result
+            console.log(result);
+
+            //Printing the score
+            console.log(`Score: Computer -> ${computerCounter}; You ->  ${playerCounter}`)
+            console.log("")
+        };
+
+        //Final result
+        if (computerCounter < playerCounter) {
+            console.log("You Win!!");
+        }else if (playerCounter < computerCounter) {
+            console.log("Computer Wins!!");
+        }else{
+            console.log("Its a tie");
+        };
+    </script>    
+</body>
+</html>
